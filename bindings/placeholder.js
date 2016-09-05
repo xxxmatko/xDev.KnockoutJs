@@ -1,7 +1,19 @@
-define([
-	"jquery",
-	"knockout"
-], function ($, ko) {
+(function (root, factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(["jquery", "knockout"], factory);
+    } 
+    else if (typeof module === "object" && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require("jquery"), require("knockout"));
+    } 
+    else {
+        // Browser globals (root is window)
+        factory(root.jQuery, root.ko);
+    }
+}(this, function ($, ko) {
     //#region [ Fields ]
 
     var placeholders = [];
@@ -19,8 +31,8 @@ define([
     //#region [ Methods : Private ]
 
     /**
-	 * Animates blinking of the last character.
-	 */
+     * Animates blinking of the last character.
+     */
     var _blinkLastChar = function () {
         if (lastCharTimeout) {
             clearTimeout(lastCharTimeout);
@@ -45,8 +57,8 @@ define([
 
 
     /**
-	 * Animates typing in in the textbox.
-	 */
+     * Animates typing in in the textbox.
+     */
     var _typeIn = function () {
         if (timeout) {
             clearTimeout(timeout);
@@ -153,8 +165,8 @@ define([
 
             // Stop typing in focues and restart on focus out
             $(domNode)
-				.focus(_domNode_onFocus)
-				.blur(_domNode_onBlur);
+                .focus(_domNode_onFocus)
+                .blur(_domNode_onBlur);
 
             // Clear placeholder
             $(domNode).attr("placeholder", "");
@@ -201,4 +213,4 @@ define([
     };
 
     //#endregion
-});
+}));
