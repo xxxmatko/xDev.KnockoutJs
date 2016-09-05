@@ -1,2 +1,5 @@
 # xDev.KnockoutJs
-Plugins and modules for knockoutjs.
+
+Pluginy a moduly pre ```knockoutjs```.
+
+## Použitie
